@@ -22,4 +22,4 @@ jobs:
         with:
           api-url: ${{ secrets.OREN_CODES_API_URL }}
           api-key: ${{ secrets.OREN_CODES_ADMIN_API_KEY }}
-          theme-name: "casper-by-oren-${{ github.ref_name }}"
+          theme-name: "oren-codes-source-${{ github.ref_name }}"
