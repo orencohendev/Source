@@ -6,10 +6,16 @@ on:
       - '*'
 
 jobs:
-  deploy:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      theme-name: "geek-peek-source-${{ github.ref_name }}"
     steps:
       - uses: actions/checkout@v4
+  deploy:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
       - name: Find and Replace
         uses: jacobtomlinson/gha-find-replace@v2
         with:
@@ -20,4 +26,4 @@ jobs:
         with:
           api-url: ${{ secrets.OREN_CODES_API_URL }}
           api-key: ${{ secrets.OREN_CODES_ADMIN_API_KEY }}
-          theme-name: "oren-codes-source-${{ github.ref_name }}"
+          theme-name: ${{ needs.setup.outputs.theme-name }}
