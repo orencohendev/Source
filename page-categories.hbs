@@ -1,0 +1,49 @@
+{{!--
+This template is used for the tags page.
+You must first create a page called Tags in the dashboard to enable it.
+--}}
+
+{{!-- This block preloads specific assets for the tags page --}}
+{{#contentFor "preload"}}
+  <link rel="preload" as="style" href="{{asset "built/categories.css"}}">
+{{/contentFor}}
+
+{{!-- This block loads specific styles for the tags page --}}
+{{#contentFor "styles"}}
+  <link rel="stylesheet" type="text/css" href="{{asset "built/categories.css"}}">
+{{/contentFor}}
+
+{{!-- The tag below means: insert everything in this file
+into the {body} of the default.hbs template --}}
+{{!< default}}
+
+
+<main class="main-wrap">
+  <div class="l-content">
+    <div class="l-wrapper" data-animate="fade-up">
+      <div class="l-tags-container">
+        {{#get 'tags' limit='all' include='count.posts'}}
+          {{#foreach tags}}
+            <div class="m-tag-card">
+              <a href="{{url}}" class="m-tag-card__link {{#unless feature_image}}no-picture{{/unless}}" aria-label="{{name}}">
+                {{#if feature_image}}
+                  <img class="m-tag-card__picture" src="{{img_url feature_image size="m"}}" loading="lazy" alt="">
+                {{/if}}
+                <div class="m-tag-card__info {{#unless feature_image}}no-picture{{/unless}}">
+                  <h4 class="m-tag-card__name">{{name}}</h4>
+                  <span class="m-tag-card__counter">
+                    {{plural count.posts empty=(t "No posts") singular=(t "1 post") plural=(t "% posts")}}
+                  </span>
+                </div>
+              </a>
+            </div>
+            {{else}}
+              <p class="m-not-found">
+                {{t "No tags found :("}}
+              </p>
+          {{/foreach}}
+        {{/get}}
+      </div>
+    </div>
+  </div>
+</main>
