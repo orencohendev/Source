@@ -9,7 +9,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      theme-name: "geek-peek-source-${{ github.ref_name }}"
+      theme-name: "oren-cohen-source-${{ github.ref_name }}"
     steps:
       - uses: actions/checkout@v4
   deploy:
@@ -21,10 +21,10 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "HYVOR_TALK_WEBSITE_ID"
-          replace: ${{ secrets.GEEK_PEEK_HYVOR_TALK_ID }}
+          replace: ${{ secrets.OREN_COHEN_WEBSITE_ID }}
           regex: false
       - uses: TryGhost/action-deploy-theme@v1
         with:
-          api-url: ${{ secrets.OREN_COHEN_API_URL }}
-          api-key: ${{ secrets.OREN_COHEN_ADMIN_API_KEY }}
+          api-url: ${{ secrets.THE_OREN_COHEN_API_URL }}
+          api-key: ${{ secrets.THE_OREN_COHEN_API_KEY }}
           theme-name: ${{ needs.setup.outputs.theme-name }}
