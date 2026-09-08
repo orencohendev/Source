@@ -1,0 +1,17 @@
+## routes.yaml
+
+routes:
+  /newsletter/:
+    controller: channel
+    template: newsletter
+    filter: tag:hash-newsletter
+
+collections:
+  /:
+    permalink: /{slug}/
+    template: index
+    filter: tag:-hash-newsletter
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/
